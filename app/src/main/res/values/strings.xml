@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Sandesh</string>
+    <string name="need_account">Need Account?</string>
+    <string name="what_should_we_call_you">What should we call you?</string>
+    <string name="your_email_id_goes_here">Your Email Id goes here</string>
+    <string name="password">Password</string>
+    <string name="i_want_to_join">I want to join!</string>
+    <string name="log_out">Log Out</string>
+    <string name="create_your_account">Create your account</string>
+    <string name="log_in">Log In</string>
+    <string name="welcome_to_sandesh">Welcome to Sandesh</string>
+    <string name="registered_email">Registered Email</string>
+    <string name="log_in_text_on_btn">Log IN</string>
+    <string name="log_in_to_sandesh">Log in to Sandesh</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="this_is_my_status">This is my Status</string>
+    <string name="username">UserName</string>
+    <string name="change_image">Change Image</string>
+    <string name="change_status">Change Status</string>
+    <string name="settings">Settings</string>
+    <string name="enter_new_status">Enter new status</string>
+    <string name="all_users">All Users</string>
+    <string name="user_name">User Name</string>
+    <string name="model_status">This is my status</string>
+    <string name="display_name">Display Name</string>
+    <string name="display_name2">Display Name</string>
+    <string name="current_user_status">Current User Status</string>
+    <string name="send_friend_request">Send Friend Request</string>
+    <string name="total_friends">Total Friends</string>
+    <string name="user_display_profile_name">User Display Profile Name</string>
+    <string name="decline_friend_request">Decline Friend Request</string>
+    <string name="total_friends">Total Friends</string>
+</resources>

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "725967402812",
+    "firebase_url": "https://sandesh-4b203.firebaseio.com",
+    "project_id": "sandesh-4b203",
+    "storage_bucket": "sandesh-4b203.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:725967402812:android:e18a0d434971aee1",
+        "android_client_info": {
+          "package_name": "com.knight.sandesh"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "725967402812-ish17o5bjrm9b0vufqulhrqm01vl1mhc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.knight.sandesh",
+            "certificate_hash": "9245e53067378e58a91ffe7bed92677f6e0690e6"
+          }
+        },
+        {
+          "client_id": "725967402812-jil6hg0f87ttkfam8l2fdr1l8kp99t56.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSoBJ2oHLKlgJKFvELOMColMN3g2qOEpU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "725967402812-jil6hg0f87ttkfam8l2fdr1l8kp99t56.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
