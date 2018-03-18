@@ -24,6 +24,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
@@ -76,6 +78,9 @@ public class SettingsActivity extends AppCompatActivity {
         String current_uid = mCurrenUser.getUid();
         mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(current_uid);
 
+        //FOR OFFLINE STORAGE
+        mUserDatabase.keepSynced(true);
+
         //retrieve data from database
         mUserDatabase.addValueEventListener(new ValueEventListener() {
             @Override
@@ -84,7 +89,7 @@ public class SettingsActivity extends AppCompatActivity {
                 // Toast.makeText(SettingsActivity.this, dataSnapshot.toString(), Toast.LENGTH_LONG).show();
 
                 String name = dataSnapshot.child("name").getValue().toString();
-                String image = dataSnapshot.child("image").getValue().toString();
+                final String image = dataSnapshot.child("image").getValue().toString();
                 String status = dataSnapshot.child("status").getValue().toString();
                 String thumb_image = dataSnapshot.child("thumb_image").getValue().toString();
 
@@ -95,7 +100,25 @@ public class SettingsActivity extends AppCompatActivity {
                 //Loading profile pic in to imageview using Picasso
 
                 if(!image.equals("default")){
-                    Picasso.with(SettingsActivity.this).load(image).placeholder(R.drawable.ic_account_circle_black_48dp).into(mImage);
+
+                    //For online retrieval
+                    //Picasso.with(SettingsActivity.this).load(image).placeholder(R.drawable.ic_account_circle_black_48dp).into(mImage);
+
+                    //For Offline(fast) retreival & callback for check if the image is stored offline or not
+                    Picasso.with(SettingsActivity.this).load(image).networkPolicy(NetworkPolicy.OFFLINE)
+                            .placeholder(R.drawable.ic_account_circle_black_48dp).into(mImage, new Callback() {
+                        @Override
+                        public void onSuccess() {
+
+                        }
+
+                        @Override
+                        public void onError() {
+
+                            Picasso.with(SettingsActivity.this).load(image).placeholder(R.drawable.ic_account_circle_black_48dp).into(mImage);
+
+                        }
+                    });
                 }
 
 

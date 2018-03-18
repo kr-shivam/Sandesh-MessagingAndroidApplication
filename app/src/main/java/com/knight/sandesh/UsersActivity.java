@@ -14,6 +14,8 @@ import android.widget.TextView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -38,6 +40,7 @@ public class UsersActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
+        mUsersDatabase.keepSynced(true);
 
         mUsersList = (RecyclerView) findViewById(R.id.users_list);
         mUsersList.setHasFixedSize(true);
@@ -81,6 +84,8 @@ public class UsersActivity extends AppCompatActivity {
             }
         };
 
+
+
         mUsersList.setAdapter(firebaseRecyclerAdapter);
     }
 
@@ -102,9 +107,23 @@ public class UsersActivity extends AppCompatActivity {
             userStatusView.setText(status);
         }
 
-        public void setUserImage(String thumb_image, Context ctx) {
-            CircleImageView userImageView = (CircleImageView) mView.findViewById(R.id.user_single_image);
-            Picasso.with(ctx).load(thumb_image).placeholder(R.drawable.ic_account_circle_black_48dp).into(userImageView);
+        public void setUserImage(final String thumb_image, final Context ctx) {
+            final CircleImageView userImageView = (CircleImageView) mView.findViewById(R.id.user_single_image);
+            Picasso.with(ctx).load(thumb_image).networkPolicy(NetworkPolicy.OFFLINE)
+            .placeholder(R.drawable.ic_account_circle_black_48dp).into(userImageView, new Callback() {
+                @Override
+                public void onSuccess() {
+
+                }
+
+                @Override
+                public void onError() {
+
+                    Picasso.with(ctx).load(thumb_image)
+                            .placeholder(R.drawable.ic_account_circle_black_48dp).into(userImageView);
+
+                }
+            });
         }
     }
 }
