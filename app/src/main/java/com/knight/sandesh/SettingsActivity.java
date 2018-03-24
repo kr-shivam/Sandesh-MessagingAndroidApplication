@@ -53,6 +53,9 @@ public class SettingsActivity extends AppCompatActivity {
     private Button changeImageButton;
     private Button changeStatusButton;
 
+    private FirebaseAuth mAuth;
+    private DatabaseReference mUserRef;
+
     private ProgressDialog mProgressDialog;
 
     private static final int GALLERY_PICK = 1;
@@ -70,6 +73,9 @@ public class SettingsActivity extends AppCompatActivity {
         changeStatusButton = (Button) findViewById(R.id.btn_change_status);
         changeImageButton = (Button) findViewById(R.id.btn_change_image);
         mImageStorage = FirebaseStorage.getInstance().getReference();
+
+        mAuth = FirebaseAuth.getInstance();
+        mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
 
         //  changeImageButton
 
@@ -163,6 +169,28 @@ public class SettingsActivity extends AppCompatActivity {
                         .start(SettingsActivity.this);
             }
         });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if(currentUser!=null){
+
+           mUserRef.child("online").setValue(true);
+        }
+    }
+
+    @Override
+    protected void onStop() {
+
+        super.onStop();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if(currentUser!=null){
+            mUserRef.child("online").setValue(false);
+        }
     }
 
     @Override

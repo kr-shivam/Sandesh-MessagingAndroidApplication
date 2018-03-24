@@ -46,6 +46,8 @@ public class ProfileActivity extends AppCompatActivity {
     private DatabaseReference mNotificationDatabase;
 
     private DatabaseReference mRootRef;
+    private FirebaseAuth mAuth;
+    private DatabaseReference mUserRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,8 @@ public class ProfileActivity extends AppCompatActivity {
         final String user_id = getIntent().getStringExtra("user_id");
 
         mRootRef = FirebaseDatabase.getInstance().getReference();
+        mAuth = FirebaseAuth.getInstance();
+        mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(user_id);
         mUsersDatabase.keepSynced(true);
 
@@ -127,6 +131,7 @@ public class ProfileActivity extends AppCompatActivity {
                                 mProfileSendReqButton.setText("Accept Friend Request");
                                 mDeclineBtn.setVisibility(View.VISIBLE);
                                 mDeclineBtn.setEnabled(true);
+                                mProgressDialog.dismiss();
 
                             }else {
                                 if (req_type.equals("sent")){
@@ -135,10 +140,11 @@ public class ProfileActivity extends AppCompatActivity {
 
                                     mDeclineBtn.setVisibility(View.INVISIBLE);
                                     mDeclineBtn.setEnabled(false);
+                                    mProgressDialog.dismiss();
 
 
                                 }
-                                mProgressDialog.dismiss();
+
                             }
 
                         }else {
@@ -423,5 +429,24 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if(currentUser!=null){
+            mUserRef.child("online").setValue(true);
+
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser!=null){
+            mUserRef.child("online").setValue(false);
+        }
     }
 }

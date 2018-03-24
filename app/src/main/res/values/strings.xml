@@ -32,4 +32,11 @@
     <string name="user_display_profile_name">User Display Profile Name</string>
     <string name="decline_friend_request">Decline Friend Request</string>
     <string name="total_friends2">Total Friends</string>
+    <string name="current_chat_uname">Current Chat Username</string>
+    <string name="last_seen">Last Seen</string>
+    <string name="message_text">Message Text</string>
+    <string name="_00_00">00:00</string>
+    <string name="display_name3">Display Name</string>
+    <string name="enter_message">Enter Message...</string>
+    <string name="coming_soon">Coming Soon</string>
 </resources>
